@@ -1,0 +1,132 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Máquinas </h2>
+                    {% if perms.maintenance.add_maquina %}
+                      <ul class=" nav navbar-right panel_toolbox">
+                        <li><button type=button onclick="location.href='{% url 'maquina_create' %}';" class="btn btn-success">Nueva máquina</button>
+                        </li>
+                      </ul>
+                    {% endif %}
+                    <div class="clearfix"></div>
+                  </div>
+                    <div class="x_content">
+                  </div>
+                  <div class="x_content">
+                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Nombre</th>
+                          <th>Clasificación</th>
+                          <th>Compania</th>
+                          <th>Kilometraje</th>
+                          <th>Horometro Motor</th>
+                          <th>Tiene Bomba</th>
+                          <th>Horometro Bomba</th>
+                          <th>Conductores</th>
+                          <th>Numero motor</th>
+                          <th>Numero chasis</th>
+                          <th>VIN</th>
+                          <th>Patente</th>
+                        </tr>
+                      </thead>
+
+
+                      <tbody>
+
+                        {% for maquina in object_list %}
+                        <tr>
+                            <td></td>
+                            <td><a style="color: orangered;text-decoration: underline;" href="{{ maquina.get_absolute_url }}">{{ maquina.nombre }}</a></td>
+                            <td>{{ maquina.clasificacion }}</td>
+                            <td>{{ maquina.company }}</td>
+                            <td align="right"> {{ maquina.kilometraje }}</td>
+                            <td align="right"> {{ maquina.hodometro }}</td>
+                            {% if maquina.tiene_bomba is True %}
+                              <td align="center">Si</td>
+                              <td align="right"> {{ maquina.hodometro_bomba }}</td>
+                            {% else %}
+                              <td align="center"> No</td>
+                              <td align="right">--</td>
+                            {% endif %}                            <td>
+                            {% for conductor in maquina.conductor.all %}
+                              {{ conductor.nombre }} {{ conductor.ap_paterno }} <br>
+                            {% endfor %}
+                            </td>
+                            <td>{{ maquina.numero_motor|default_if_none:"--" }}</td>
+                            <td>{{ maquina.numero_chasis|default_if_none:"--" }}</td>
+                            <td>{{ maquina.bin|default_if_none:"--" }}</td>
+                            <td>{{ maquina.patente|default_if_none:"--" }}</td>
+                            
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+      </div>
+    </div>
+    <!-- jQuery -->
+    <script type="text/javascript" src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/datepicker/daterangepicker.js' %}"></script>
+    <!-- Datatables -->
+    <script type="text/javascript" src="{% static 'vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-keytable/js/dataTables.keyTable.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-scroller/js/dataTables.scroller.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/jszip/dist/jszip.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/pdfmake/build/pdfmake.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/pdfmake/build/vfs_fonts.js' %}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+
+    <!-- Datatables -->
+    <script>
+
+        $(document).ready(function() {
+            $('#datatable-responsive').DataTable({
+              "iDisplayLength": 30,
+              "searching": false,
+            });
+        });
+    </script>
+
+    <script>
+       
+    </script>
+
+    <!-- /Datatables -->
+
+{% endblock content %}

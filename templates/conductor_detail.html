@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Detalle Conductor</h2>
+                      <ul class=" nav navbar-right panel_toolbox">
+                      {% if perms.maintenance.change_conductor %}
+                        <li><button type="button" onclick="location.href='{% url 'conductor_update' pk=object.id %}';" class="btn btn-primary" >Editar</button>
+                        </li>
+                      {% endif %}
+                      {% if perms.maintenance.delete_conductor %}
+                          <li><button type="button" onclick="location.href='{% url 'conductor_delete' pk=object.id %}';" class="btn btn-danger">Eliminar</button>
+                        </li>
+                      {% endif %}
+
+                      </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                      <div class="col-xs-12 col-md-12">
+                          <div class="table-responsive">
+                            <table id="table-responsive" class="table table-bordered nowrap">
+                              <tbody>
+                                <tr>
+                                  <th style="width:50%">NOMBRES:</th>
+                                  <td>{{ object.nombre}}</td>
+                                </tr>
+                                <tr>
+                                  <th style="width:50%">APELLIDO PATERNO:</th>
+                                  <td>{{object.ap_paterno }}</td>
+                                </tr>
+                                <tr>
+                                  <th style="width:50%">APELLIDO MATERNO:</th>
+                                  <td>{{object.ap_materno }}</td>
+                                </tr>
+                                <tr>
+                                  <th>RUT:</th>
+                                  <td>{{ object.rut|default_if_none:"--" }}</td>
+                                </tr>
+                                <tr>
+                                  <th>COMPAÑÍA:</th>
+                                  <td>{{ object.company }}</td>
+                                </tr>
+                                <tr>
+                                  <th>MÁQUINAS ASIGNADAS:</th>
+                                  <td>{{ maquinas_list }}</td>
+                                </tr>
+                                <tr>
+                                  <th>VENCIMIENTO LICENCIA:</th>
+                                  <td>{{ object.venc_lic|default_if_none:"--" }}</td>
+                                </tr>
+                                <tr>
+                                  <th>OBSERVACIONES:</th>
+                                  <td>{{ object.observaciones_cond|default_if_none:"--" }}</td>
+                                </tr>
+                                {% if object.foto|default_if_none:"--" %}
+                                <tr>
+                                  <th>IMAGEN:</th>
+                                  <td><img src="{{ object.foto.url }}" height="100" width="100"></td>
+                                </tr>
+                                {% endif %}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+      </div>
+    </div>
+    <!-- jQuery -->
+    <script type="text/javascript" src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+
+{% endblock %}

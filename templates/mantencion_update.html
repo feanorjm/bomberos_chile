@@ -1,0 +1,361 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+    <div class="right_col" role="main">
+      <div class="">
+
+        <!--<div class="page-title">
+          <div class="title_left">
+            <h3>BITACORA</h3>
+          </div>
+        </div>-->
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Editar mantención</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <form id="form_mantencion" data-parsley-validate class="form-horizontal form-label-left" action="" method="post">{% csrf_token %}
+                        {{ form.errors }}
+                        {{ form.non_field_errors }}
+                        <div class="form-group pull-in clearfix">
+                            <div class="col-sm-2">
+                                <label style="text-align:left;" class="control-label col-sm-12" for="{{ company.id_for_label }}">Compañía </label>
+                                {{ form.company }}
+                                {{ form.company.errors }}
+                            </div>
+                            <div class="col-sm-2">
+                                <label style="text-align:left;" class="control-label col-sm-12" for="{{ maquina.id_for_label }}">Máquina </label>
+                                {{ form.maquina }}
+                                {{ form.maquina.errors }}
+                            </div>
+                            <div class="col-sm-2">
+                                <label style="text-align:left;" class="control-label col-sm-12" for="{{ fecha.id_for_label }}">Fecha </label>
+                                {{ form.fecha }}
+                                {{ form.fecha.errors }}
+                            </div>
+                            <div class="col-sm-2">
+                                <label style="text-align:left;" class="control-label col-sm-12" for="{{ hora_salida.id_for_label }}">Hora Salida</label>
+                                {{ form.hora_salida }}
+                                {{ form.hora_salida.errors }}
+                            </div>
+                            <div class="col-sm-2">
+                                <label style="text-align:left;" class="control-label col-sm-12" for="{{ hora_llegada.id_for_label }}">Hora Regreso</label>
+                                {{ form.hora_llegada }}
+                                {{ form.hora_llegada.errors }}
+                            </div>
+                        </div>
+                        <div class="form-group pull-in clearfix">
+                            <div class="col-sm-2">
+                                <label style="text-align:left;" class="control-label col-sm-12" for="{{ ki_salida.id_for_label }}">Kilometraje Salida </label>
+                                {{ form.ki_salida }}
+                                {{ form.ki_salida.errors }}
+                            </div>
+                            <div class="col-sm-2">
+                                <label style="text-align:left;" class="control-label col-sm-12" for="{{ ki_regreso.id_for_label }}">Kilometraje Regreso </label>
+                                {{ form.ki_regreso }}
+                                {{ form.ki_regreso.errors }}
+                            </div>
+                            <div class="col-sm-2">
+                                <label style="text-align:left;" class="control-label col-sm-12" for="{{ ho_salida.id_for_label }}">Horometro Salida </label>
+                                {{ form.ho_salida }}
+                                {{ form.ho_salida.errors }}
+                            </div>
+                            <div class="col-sm-2">
+                                <label style="text-align:left;" class="control-label col-sm-12" for="{{ ho_regreso.id_for_label }}">Horometro Regreso </label>
+                                {{ form.ho_regreso }}
+                                {{ form.ho_regreso.errors }}
+                            </div>
+                            <div id="tiene_bomba">
+                                <div class="col-sm-2">
+                                    <label style="text-align:left;" class="control-label col-sm-12" for="{{ ho_bomba_salida.id_for_label }}">Ho Bomba Salida</label>
+                                    {{ form.ho_bomba_salida }}
+                                    {{ form.ho_bomba_salida.errors }}
+                                </div>
+                                <div class="col-sm-2">
+                                    <label style="text-align:left;" class="control-label col-sm-12" for="{{ ho_bomba_regreso.id_for_label }}">Ho Bomba Regreso</label>
+                                    {{ form.ho_bomba_regreso }}
+                                    {{ form.ho_bomba_regreso.errors }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group pull-in clearfix">
+                            <div class="col-sm-2">
+                                <label style="text-align:left;" class="control-label col-sm-12" for="{{ cod_man.id_for_label }}">Orden de trabajo</label>
+                                {{ form.cod_man }}
+                                {{ form.cod_man.errors }}
+                            </div>
+                            {% if user.usuariocomp.tipo == "3" or user.usuariocomp.tipo == "2" %}
+                                <div class="col-sm-2">
+                                    <label style="text-align:left;" class="control-label col-sm-12" for="{{ num_factura.id_for_label }}">Nº factura </label>
+                                    {{ form.num_factura }}
+                                    {{ form.num_factura.errors }}
+                                </div>
+                                <div class="col-sm-2">
+                                    <label style="text-align:left;" class="control-label col-sm-12" for="{{ valor.id_for_label }}">Costo Servicio</label>
+                                    {{ form.valor }}
+                                    {{ form.valor.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="col-sm-3">
+                                <label style="text-align:left;" class="control-label col-md-12" for="{{ taller.id_for_label }}">Taller </label>
+                                {{ form.taller }}
+                                {{ form.taller.errors }}
+                            </div>
+                            <div class="col-sm-3">
+                                <label style="text-align:left;" class="control-label col-sm-12" for="{{ responsable.id_for_label }}">Responsable </label>
+                                {{ form.responsable }}
+                                {{ form.responsable.errors }}
+                            </div>
+                        </div>
+                        <div class="form-group pull-in clearfix">
+                            <div class="col-sm-4">
+                                <label style="text-align:left;" class="control-label col-sm-12" for="{{ observacion.id_for_label }}">Observacion </label>
+                                {{ form.observacion }}
+                                {{ form.observacion.errors }}
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <button id="boton_form" type="submit" name="form" class="btn btn-success">Guardar</button>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+        <!-- /page content -->
+
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!--smart-selects-->
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedm2m.js' %}"></script>
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/datepicker/bootstrap-datepicker.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/moment-with-locales.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datetime-picker/bootstrap-datetimepicker.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-keytable/js/dataTables.keyTable.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/datatables.net-scroller/js/dataTables.scroller.min.js' %}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+
+    <!-- bootstrap-daterangepicker -->
+    <script>
+      $(document).ready(function() {
+        $('#id_maquina').addClass('form-control');
+        $('#id_responsable').addClass('form-control');
+
+        //$('#fecha').datepicker({format: "yyyy-mm-dd",weekStart: 1});
+
+        $('#fecha').datetimepicker({
+            format: "YYYY-MM-DD",
+            pickTime: false,
+        });
+
+      });
+    </script>
+
+    <script>
+
+        $("#id_ho_regreso").on('blur',function(){
+            var Hm_salida = $("#id_ho_salida").val();
+            var Hm_regreso = $("#id_ho_regreso").val();
+
+            if (parseFloat(Hm_regreso) < parseFloat(Hm_salida)){
+                $.confirm({
+                    title: 'Cuidado!',
+                    content: "El HODOMETRO REGRESO no debe ser MENOR que el HODOMETRO SALIDA",
+                    buttons: {
+                        aceptar: function () {
+                            $("#id_ho_regreso").focus();
+                        },
+                    }
+                });
+            }
+
+        });
+
+        $("#id_ki_regreso").on('blur',function(){
+            var km_salida = $("#id_ki_salida").val();
+            var km_regreso = $("#id_ki_regreso").val();
+            var diferencia = parseFloat(km_regreso) - parseFloat(km_salida);
+
+            if (parseFloat(km_regreso) < parseFloat(km_salida)){
+                $.confirm({
+                    title: 'Cuidado!',
+                    content: "El KILOMETRAJE REGRESO no debe ser MENOR que el KILOMETRAJE SALIDA",
+                    buttons: {
+                        aceptar: function () {
+                            $("#id_ki_regreso").focus();
+                        },
+                    }
+                });
+            }
+            if (diferencia > 999){
+                $.confirm({
+                    title: 'Cuidado!',
+                    content: "La diferencia de kilometraje no debe ser mayor a 999",
+                    buttons: {
+                        aceptar: function () {
+                            $("#id_ki_regreso").focus();
+                        },
+                    }
+                });
+            }
+
+        });
+
+        $("#id_ho_bomba_regreso").on('blur',function(){
+            var Hm_bomba_salida = $("#id_ho_bomba_salida").val();
+            var Hm_bomba_regreso = $("#id_ho_bomba_regreso").val();
+
+            console.log(Hm_bomba_salida + ", " + Hm_bomba_regreso);
+
+            if (parseFloat(Hm_bomba_regreso) < parseFloat(Hm_bomba_salida)){
+                $.confirm({
+                    title: 'Cuidado!',
+                    content: "El HODOMETRO BOMBA REGRESO no debe ser MENOR que el HODOMETRO BOMBA SALIDA",
+                    buttons: {
+                        aceptar: function () {
+                            $("#id_ho_bomba_regreso").focus();
+                        },
+                    }
+                });
+            }
+
+        });
+
+        $("#form_mantencion").on( "submit", function( event ) {
+          if ($("#tiene_bomba").css('display') == 'block'){
+                var Hm_bomba_salida = $("#id_ho_bomba_salida").val();
+                var Hm_bomba_regreso = $("#id_ho_bomba_regreso").val();
+
+                if(Hm_bomba_salida === "" || Hm_bomba_regreso === ""){
+                    $.alert({
+                        title: 'Cuidado!',
+                        content: "Debe completar los campos HODOMETRO BOMBA",
+                    });
+                    return false;
+                }
+
+
+                else if (parseFloat(Hm_bomba_regreso) < parseFloat(Hm_bomba_salida)){
+                    $.confirm({
+                        title: 'Cuidado!',
+                        content: "El HODOMETRO BOMBA REGRESO no debe ser MENOR que el HODOMETRO BOMBA SALIDA",
+                        buttons: {
+                            aceptar: function () {
+                                $("#id_ho_bomba_regreso").focus();
+                            },
+                        }
+                    });
+                    return false;
+                }
+                else{
+                    return true;
+                }
+
+            }
+            else{
+                return true;
+            }
+
+        });
+
+        /*$("#id_maquina").change(function(){
+            var maquina = this.value;
+            if(maquina !== ""){
+                var datos_form = $("#form_mantencion :hidden").serialize();
+                var datos = datos_form+"&maquina="+maquina;
+                console.log(datos);
+                $.ajax({
+                    url: "{% url 'get_parametros_maquina' %}",
+                    type: "POST",
+                    data: datos,
+                    success: function (data) {
+                        $("#id_ki_salida").empty();
+                        $("#id_ho_salida").empty();
+                        $("#id_ho_bomba_salida").empty();
+                        $("#id_ho_bomba_regreso").empty();
+                        for(var i in data.parametros) {
+                            if(data.parametros[i].kilometraje !== null && data.parametros[i].kilometraje !== null){
+                                $("#id_ki_salida").val(data.parametros[i].kilometraje);
+                                $("#id_ho_salida").val(data.parametros[i].hodometro);
+                            }
+                            else{
+                                $("#id_ki_salida").val("");
+                                $("#id_ho_salida").val("");
+                            }
+
+                            cant = data.ultimo_servicio.length;
+
+                            $('#fecha').data('DateTimePicker').destroy();
+
+                            if (cant > 0) {
+                                for(var i in data.ultimo_servicio) {
+                                    if(data.ultimo_servicio[i].fecha !== null){
+                                        var ultimo_servicio = data.ultimo_servicio[i].fecha;
+                                        //console.log(ultimo_servicio);
+                                        $('#fecha').datetimepicker({
+                                            format: "YYYY-MM-DD",
+                                            minDate: ultimo_servicio,
+                                            pickTime: false,
+                                        });
+                                    }
+                                }
+                            }
+                            else{
+                                $('#fecha').datetimepicker({
+                                    format: "YYYY-MM-DD",
+                                    pickTime: false,
+                                });
+                            }
+                        }
+                    }
+                });
+            }
+        });*/
+
+    function commaSeparateNumber(valor){
+        while (/(\d+)(\d{3})/.test(valor.toString())){
+          valor = valor.toString().replace(/(\d+)(\d{3})/, '$1'+'.'+'$2');
+        }
+        return valor;
+    }
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Detalle servicio</h2>
+                      <ul class=" nav navbar-right panel_toolbox">
+                        <li><button type="button" onclick="location.href='{% url 'bitacora_update' pk=object.id %}';" class="btn btn-primary" >Editar</button>
+                        </li>
+                          <li><button type="button" onclick="location.href='{% url 'bitacora_delete' pk=object.id %}';" class="btn btn-danger">Eliminar</button>
+                        </li>
+                      </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                      <div class="col-xs-12 col-md-12">
+                          <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                              <tbody>
+                              <tr>
+                                  <th style="width:50%">Identificador Servicio:</th>
+                                  <td>{{ object.id }}</td>
+                                </tr>
+                                <tr>
+                                  <th style="width:50%">Compañía:</th>
+                                  <td>{{ object.company }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Máquina:</th>
+                                  <td>{{ object.maquina }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Conductor:</th>
+                                  <td>{{ object.conductor }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Dirección:</th>
+                                  <td>{{ object.direccion }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Fecha:</th>
+                                  <td>{{ object.fecha }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Hora Despacho:</th>
+                                  <td>{{ object.hora_salida }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Hora 6-10:</th>
+                                  <td>{{ object.hora_llegada }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Clave:</th>
+                                  <td>{{ object.clave }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Kilometraje salida:</th>
+                                  <td>{{ object.kilometraje_salida }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Kilometraje llegada:</th>
+                                  <td>{{ object.kilometraje_llegada }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Horometro motor salida:</th>
+                                  <td>{{ object.hodometro_salida }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Horometro Motor Regreso:</th>
+                                  <td>{{ object.hodometro_llegada }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Horometro Bomba Salida:</th>
+                                  <td>{{ object.ho_bomba_salida|default_if_none:"--" }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Horometro Bomba Regreso:</th>
+                                  <td>{{ object.ho_bomba_regreso|default_if_none:"--" }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Observaciones:</th>
+                                  <td>{{ object.observciones }}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+      </div>
+    </div>
+    <!-- jQuery -->
+    <script type="text/javascript" src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+
+{% endblock %}
